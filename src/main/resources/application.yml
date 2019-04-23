@@ -1,0 +1,54 @@
+server:
+  port: 10010
+
+spring:
+  thymeleaf:
+    prefix: classpath:/templates/
+    suffix: .html
+    mode: HTML5
+    encoding: UTF-8
+    cache: false
+  resources:
+    chain:
+      strategy:
+        content:
+          enabled: true
+          paths: /**
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://127.0.0.1:3306/admin?&useUnicode=true&characterEncoding=utf-8&autoReconnect=true&useSSL=false&serverTimezone=GMT%2B8
+    username: root
+    password: 123456
+    hikari:
+      auto-commit: true
+      connection-test-query: SELECT 1
+      connection-timeout: 30000
+      idle-timeout: 30000
+      max-lifetime: 1800000
+      maximum-pool-size: 15
+      minimum-idle: 5
+      pool-name: DatebookHikariCP
+      type: com.zaxxer.hikari.HikariDataSource
+  servlet:
+    multipart:
+      max-file-size: "1024MB"
+      max-request-size: "1024MB"
+  redis:
+    timeout: 5000
+    lettuce:
+      pool:
+        max-idle: 8
+        min-idle: 0
+        max-active: 8
+        max-wait: -1
+    host: 127.0.0.1
+    port: 6379
+    password: 123456
+#    配置同时在线人数,踢出后跳转页面
+custom:
+  shiro:
+    kickout:
+      max-num: 1
+      url: "/admin/login"
+
+
